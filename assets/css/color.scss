@@ -69,6 +69,21 @@ $error-800: #b40700;
 $error-900: #860c07;
 $error-950: #520300;
 
+// Those Theme Colors
+$specials: (
+    'red': #FF6F6F,
+    'purple': #836FFF,
+    'yellow': #FFB21B,
+    'green': #6FFFA0,
+    'black': #3E383F
+);
+
+@each $key, $val in $specials {
+    .bg-s#{$key} {
+        background-color: $val;
+    }
+}
+
 // Class Scripting
 $color_map: (
     primary: "primary",
@@ -77,6 +92,7 @@ $color_map: (
     warning: "warning",
     error: "error",
 );
+
 
 // Function to calculate the step
 @function calculate-step($start, $end, $step) {
@@ -95,17 +111,17 @@ $color_map: (
 @each $key, $val in $color_map {
     // Generate text and border defaults
     .text-#{key} {
-        color: #{$val}-#{400};
+        color: unquote("$#{$val}-#{400}");
     }
     .border-#{key} {
-        border-color: #{$val}-#{400};
+        border-color: unquote("$#{$val}-#{400}");
     }
 
     // Generate Emphasis on the default colors
 
     // Get the lightness first of the value then decide if wether to add color as dark or light
     // $lightness: lightness(#{$val}-#{500});
-    $opp: #{val}-#{950};
+    $opp: unquote("$#{$val}-#{950}");
 
     // @if ($lightness > 50%) {
     //     $opp: #{val}-#{950}
@@ -117,7 +133,7 @@ $color_map: (
     // .border-#{key}-em { border-color: $emph; }
 
     .bg-#{key} {
-        background-color: #{$val}-#{500};
+        background-color: unquote("$#{$val}-#{500}");
         color: $opp;
 
         // &.text-em {
