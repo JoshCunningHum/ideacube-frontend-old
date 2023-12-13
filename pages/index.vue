@@ -4,6 +4,15 @@ definePageMeta({
     layout: 'anonymous'
 })
 
+const router = useRouter();
+
+// Timeout to proceed to login
+onMounted(() => {
+    setTimeout(() => {
+        router.push('/login');
+    }, 1000);
+})
+
 </script>
 
 <template>
