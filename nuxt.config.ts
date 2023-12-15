@@ -29,6 +29,10 @@ export default defineNuxtConfig({
     storybookRoute: '/__storybook__',
     port: 6006,
   },
+  devServer: {
+    host: '192.168.1.104',
+    port: 5173
+  },
   ssr: false,
 })
 

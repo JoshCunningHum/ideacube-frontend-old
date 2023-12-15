@@ -4,4 +4,7 @@ export interface User{
     last_name: string | null;
     is_approved: number;
     class_id: number;
+
+    // Not found in django but necessary in here
+    is_admin: boolean;
 }

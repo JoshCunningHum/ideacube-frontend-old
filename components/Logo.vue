@@ -21,9 +21,12 @@ const { width } = useElementBounding(refer)
 </script>
 
 <template>
-  <section  :class="`text-7xl root ${squared ? 'squared' : ''}`" :="$attrs" 
+  <section  :class="`root ${
+      squared ? 'squared text-4xl sm:text-5xl md:text-7xl' : 'text-6xl md:text-7xl lg:text-8xl'
+    }`" 
+    :="$attrs" 
     :style="`${squared ? `padding: ${width / 2}px` : ''}`">
-    <template v-if="squared">
+    <template v-if="squared" >
       <div :class="`box ${animated ? 'animate' : ''} box-red`"></div>
       <div :class="`box ${animated ? 'animate' : ''} box-yellow`"></div>
       <div :class="`box ${animated ? 'animate' : ''} box-purple`"></div>
@@ -32,7 +35,7 @@ const { width } = useElementBounding(refer)
     </template>
 
     <div class="w-max z-10 relative">
-      <span>idea</span>
+      <span class="lg:font-thin" >idea</span>
       <span class="font-bold" ref="refer">cube</span>
       <div v-if="loading"
         :class="`${squared ? 'flex' : 'inline'} absolute w-full justify-center items-center`" >

@@ -8,66 +8,89 @@
 
 // Take note, changing the primary and accent requires you to also modify the tailwind.config.ts
 
-$primary-50: #f6f6f6;
-$primary-100: #e7e7e7;
-$primary-200: #d1d1d1;
-$primary-300: #b0b0b0;
-$primary-400: #888888;
-$primary-500: #6d6d6d;
-$primary-600: #5d5d5d;
-$primary-700: #4f4f4f;
-$primary-800: #454545;
-$primary-900: #3d3d3d;
-$primary-950: #171717;
+$colors: (
+  primary: (
+    50: #f6f6f6,
+    100: #e7e7e7,
+    200: #d1d1d1,
+    300: #b0b0b0,
+    400: #888888,
+    500: #6d6d6d,
+    600: #5d5d5d,
+    700: #4f4f4f,
+    800: #454545,
+    900: #3d3d3d,
+    950: #171717
+  ),
+  secondary: (
+    50: #f7f7f7,
+    100: #f0f0f0,
+    200: #e3e3e3,
+    300: #d1d1d1,
+    400: #c2c2c2,
+    500: #aaaaaa,
+    600: #969696,
+    700: #818181,
+    800: #6a6a6a,
+    900: #585858,
+    950: #333333
+  ),
+  accent: (
+    50: #edfff7,
+    100: #d5ffee,
+    200: #aeffde,
+    300: #70ffc6,
+    400: #2bfda7,
+    500: #00dc82,
+    600: #00c06d,
+    700: #009658,
+    800: #067549,
+    900: #07603e,
+    950: #003721
+  ),
+  warning: (
+    50: #fffbeb,
+    100: #fef3c7,
+    200: #fde68a,
+    300: #fcd34d,
+    400: #fbbf24,
+    500: #f59e0b,
+    600: #d97706,
+    700: #b45309,
+    800: #92400e,
+    900: #78350f,
+  ),
+  error: (
+    50: #fff0ef,
+    100: #ffdddc,
+    200: #ffc2bf,
+    300: #ff9692,
+    400: #ff5b54,
+    500: #ff281f,
+    600: #ff0a00,
+    700: #db0900,
+    800: #b40700,
+    900: #860c07,
+    950: #520300
+  )
+);
 
-$secondary-50: #f7f7f7;
-$secondary-100: #f0f0f0;
-$secondary-200: #e3e3e3;
-$secondary-300: #d1d1d1;
-$secondary-400: #c2c2c2;
-$secondary-500: #aaaaaa;
-$secondary-600: #969696;
-$secondary-700: #818181;
-$secondary-800: #6a6a6a;
-$secondary-900: #585858;
-$secondary-950: #333333;
+@each $category, $shades in $colors {
+  @each $shade, $color in $shades {
+    .text-#{$category}-#{$shade} {
+      color: $color;
+    }
 
-$accent-50: #edfff7;
-$accent-100: #d5ffee;
-$accent-200: #aeffde;
-$accent-300: #70ffc6;
-$accent-400: #2bfda7;
-$accent-500: #00dc82;
-$accent-600: #00c06d;
-$accent-700: #009658;
-$accent-800: #067549;
-$accent-900: #07603e;
-$accent-950: #003721;
+    .border-#{$category}-#{$shade} {
+        border-color: $color;
+    }
 
-// Utility Colors
-$warning-50: #fef5f2;
-$warning-100: #fee8e2;
-$warning-200: #fed6ca;
-$warning-300: #fcb9a5;
-$warning-400: #f78969;
-$warning-500: #ee6b45;
-$warning-600: #db5027;
-$warning-700: #b8401d;
-$warning-800: #98381c;
-$warning-900: #7f331d;
-$warning-950: #45170a;
+    .bg-#{$category}-#{$shade} {
+      background-color: $color;
+    }
+  }
+}
 
-$error-50: #fff0ef;
-$error-100: #ffdddc;
-$error-200: #ffc2bf;
-$error-300: #ff9692;
-$error-400: #ff5b54;
-$error-500: #ff281f;
-$error-600: #ff0a00;
-$error-700: #db0900;
-$error-800: #b40700;
-$error-900: #860c07;
-$error-950: #520300;
 
 // Those Theme Colors
 $specials: (
@@ -81,93 +104,5 @@ $specials: (
 @each $key, $val in $specials {
     .bg-s#{$key} {
         background-color: $val;
-    }
-}
-
-// Class Scripting
-$color_map: (
-    primary: "primary",
-    secondary: "secondary",
-    accent: "accent",
-    warning: "warning",
-    error: "error",
-);
-
-
-// Function to calculate the step
-@function calculate-step($start, $end, $step) {
-    $result: ();
-    @for $i from $start through $end {
-        $result: append($result, $i);
-        @if $i + $step <= $end {
-            $i: $i + $step;
-        } @else {
-            $i: $end;
-        }
-    }
-    @return $result;
-}
-
-@each $key, $val in $color_map {
-    // Generate text and border defaults
-    .text-#{key} {
-        color: unquote("$#{$val}-#{400}");
-    }
-    .border-#{key} {
-        border-color: unquote("$#{$val}-#{400}");
-    }
-
-    // Generate Emphasis on the default colors
-
-    // Get the lightness first of the value then decide if wether to add color as dark or light
-    // $lightness: lightness(#{$val}-#{500});
-    $opp: unquote("$#{$val}-#{950}");
-
-    // @if ($lightness > 50%) {
-    //     $opp: #{val}-#{950}
-    // }
-
-    // $emph: mix($opp, #{$val}-#{500}, 20%);
-
-    // .text-#{key}-em { color: $emph; }
-    // .border-#{key}-em { border-color: $emph; }
-
-    .bg-#{key} {
-        background-color: unquote("$#{$val}-#{500}");
-        color: $opp;
-
-        // &.text-em {
-        //     color: $emph;
-        // }
-    }
-
-    // Generate Shaded Values
-    @each $i in calculate-step(50, 950, 50) {
-        $color-variable: null;
-        
-        @if $val == 'warning' {
-          $color-variable: unquote("$#{$val}-#{$i}");
-        }
-        
-        @if $val == 'error' {
-          $color-variable: unquote("$#{$val}-#{$i}");
-        }
-    
-        // Add more conditions for other color categories if needed
-    
-        @if $color-variable {
-          .text-#{$key}-#{$i} {
-            color: $color-variable;
-          }
-    
-          .bg-#{$key}-#{$i} {
-            background-color: $color-variable;
-          }
-
-          .border-#{key}-#{i} {
-              border-color: $color-variable;
-          }
-        }
-
     }
 }

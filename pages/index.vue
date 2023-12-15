@@ -7,6 +7,7 @@ definePageMeta({
 const router = useRouter();
 
 // Timeout to proceed to login
+// Why not just redirect? because sayang ang animation
 onMounted(() => {
     setTimeout(() => {
         router.push('/login');
@@ -17,7 +18,7 @@ onMounted(() => {
 
 <template>
     <div class="flex items-center justify-center h-full">
-        <Logo :squared="true" :loading="true" />
+        <Logo :squared="true"/>
     </div>
 </template>
 
