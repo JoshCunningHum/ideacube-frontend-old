@@ -1,8 +1,13 @@
+export enum QuestionType{
+    Choice,
+    Identification,
+}
+
 export interface Question{
     id: number;
-    text: string | null;
-    quiz_id: number | null;
-    type: number | null;
+    text?: string;
+    quiz_id?: number;
+    type?: QuestionType;
     autograded: boolean;
-    points: number | null;
+    points?: number;
 }

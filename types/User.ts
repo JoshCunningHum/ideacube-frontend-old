@@ -1,7 +1,7 @@
 export interface User{
     id: number;
-    first_name: string | null;
-    last_name: string | null;
+    first_name?: string;
+    last_name?: string;
     is_approved: number;
     class_id: number;
 

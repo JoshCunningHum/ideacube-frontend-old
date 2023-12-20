@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
+import { ClassCodeResponseStatus, EnrollResponseStatus } from '~/stores/Enroll';
 import { set, get } from '@vueuse/core';
 import * as Yup from 'yup';
 
 definePageMeta({
-    layout: 'anonymous'
+    layout: 'anonymous',
+    middleware: 'logged-in'
 })
 
 // Routing
@@ -71,9 +73,9 @@ const onsubmit = async (e: FormSubmitEvent<Schema>) => {
   // TODO: a data with null value means an error in fetching
   if(!data) return;
 
-  const { type } = data;
+  const { status } = data;
 
-  if(type === EnrollResponseTypes.Successful){
+  if(status === EnrollResponseStatus.Successful){
     // Redirect to login
     router.push('/login');
   }else{
@@ -92,7 +94,7 @@ const onsubmit = async (e: FormSubmitEvent<Schema>) => {
     <div class="flex flex-col items-center gap-10">
 
       <template v-if="!!ccresponse &&
-        ccresponse.type === ClassCodeResponseType.Valid">
+        ccresponse.status === ClassCodeResponseStatus.Valid">
         <BigText class="text-center">Enroll to {{ _class?.name }}</BigText>
 
         <UForm :schema="schema" :state="state" @submit="onsubmit" class="flex flex-col items-center gap-1 w-[90%]" ref="form">

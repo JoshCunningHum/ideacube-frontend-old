@@ -5,22 +5,23 @@ definePageMeta({
     middleware: 'auth'
 })
 
-// Routes
-const route = useRoute('user');
-const email = computed(() => route.params.user);
-
-// Check first if saved session is indeed the correct email
-
 // Stores
-const authStore = useAuthStore();
-const { logout } = authStore;
+const responsiveStore = useResponsiveStore();
+const { isSmall } = storeToRefs(responsiveStore);
 
 </script>
 
 <template>
-  <div>
-    This is the student page
-    <UButton label="Logout" @click="logout" />
+  <div class="w-full max-w-7xl px-4 mx-auto flex h-full">
+    
+    <!-- Sidebar Nav -->
+    <div class="h-full w-full shrink max-w-[12.5rem] border-r border-prim-700" v-if="!isSmall">
+      <SideBar />
+    </div>
+    <div class="flex-grow h-full w-full max-w-[67.5rem] ">
+
+    </div>
+
   </div>
 </template>
 

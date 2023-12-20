@@ -2,6 +2,7 @@
 import { object, string, type InferType } from 'yup';
 import type { FormSubmitEvent } from '@nuxt/ui/dist/runtime/types';
 import { set, get } from '@vueuse/core';
+import { LoginResponseStatus } from '~/stores/Auth';
 
 definePageMeta({
     layout: 'anonymous',
@@ -50,18 +51,18 @@ const onsubmit = async(e: FormSubmitEvent<Schema>) => {
   // TODO: a data with null value means an error in fetching
   if(!data) return;
   
-  const { type } = data;
+  const { status: type } = data;
 
   // Do things accordingly
-  if(type === LoginResponseType.AdminAccount){
+  if(type === LoginResponseStatus.AdminAccount){
     router.push('/admin');
-  }else if(type === LoginResponseType.StudentAccount){
+  }else if(type === LoginResponseStatus.StudentAccount){
     router.push(`/${e.data.email}`);
   }
   // Errors
-  else if(type === LoginResponseType.NonExistingEmail){
+  else if(type === LoginResponseStatus.NonExistingEmail){
     get(nonExistingEmails).push(state.email);
-  }else if(type === LoginResponseType.WrongPassword){
+  }else if(type === LoginResponseStatus.WrongPassword){
     set(wasWrongPassword, true);
   }
 
@@ -75,7 +76,6 @@ const onsubmit = async(e: FormSubmitEvent<Schema>) => {
   <div class="flex h-full justify-center items-center">
     <div class="flex flex-col items-center gap-10">
       <Logo :squared="false"/>
-
       <UForm 
         ref="form"
         :schema="schema"

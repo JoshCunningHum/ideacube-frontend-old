@@ -4,3 +4,7 @@
 html, body, div, input {
     font-family: 'Helvetica';
 }
+
+.scroll-stable {
+    scrollbar-gutter: stable;
+}

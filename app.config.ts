@@ -21,6 +21,9 @@ export default defineAppConfig({
         formGroup: {
             help: 'text-xs mt-0',
             error: 'text-xs mt-0'
+        },
+        popover: {
+            rounded: 'rounded-sm'
         }
     },
     // Nuxt Config

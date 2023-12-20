@@ -11,6 +11,9 @@ export default defineNuxtConfig({
     global: true,
     icons: ['mdi'],
   },
+  purgeCSS: {
+    whitelistPatterns: [/^ct/]
+} ,
   app: {
     head: {
       title: 'Ideacube',
@@ -33,7 +36,6 @@ export default defineNuxtConfig({
     host: '192.168.1.104',
     port: 5173
   },
-  ssr: false,
 })
 
 /** Might be used in the future

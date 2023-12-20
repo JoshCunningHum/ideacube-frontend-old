@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { get } from '@vueuse/core';
 import type { User } from '~/types/User';
 
-export enum LoginResponseType{
+export enum LoginResponseStatus{
   AdminAccount = -1,
   StudentAccount,
   WrongPassword,
@@ -11,7 +11,7 @@ export enum LoginResponseType{
 
 export interface LoginResponse{
   user: User | null,
-  type: LoginResponseType
+  status: LoginResponseStatus
 }
 
 export const useAuthStore = defineStore('Auth', () => {
@@ -20,15 +20,14 @@ export const useAuthStore = defineStore('Auth', () => {
   const router = useRouter();
 
   const login = async (email: string, password: string) : Promise<LoginResponse | null> => {
-    const url = useDjango('auth/login');
 
-    const { data, error } = await useFetch<LoginResponse>(url, {
+    const { data, error } = await useFetch<LoginResponse>('/api/login', {
       body: { username: email, password },
       method: 'POST'
     });
 
     // Save data to local session
-    account.user.value = data.value?.user || undefined;
+    account.user.value = data.value?.user || null;
 
     return get(data);
   }

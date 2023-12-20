@@ -2,13 +2,13 @@ import { defineStore } from 'pinia'
 import { get } from '@vueuse/core';
 import type { Class } from '~/types/Class'
 
-export enum ClassCodeResponseType{
+export enum ClassCodeResponseStatus{
   NotValid,
   Valid
 }
 
 export interface ClassCodeResponse{
-  type: ClassCodeResponseType,
+  status: ClassCodeResponseStatus,
   class: Class | null
 }
 
@@ -19,21 +19,20 @@ export interface EnrollParams{
   classID: string;
 }
 
-export enum EnrollResponseTypes{
+export enum EnrollResponseStatus{
   Existing,
   Successful
 }
 
 export interface EnrollResponse{
-  type: EnrollResponseTypes
+  status: EnrollResponseStatus
 }
 
 export const useEnrollStore = defineStore('Enroll', () => {
 
   const classFromCode = async (code: string) => {
-    const url = useDjango('class/code');
 
-    const { data, error } = await useFetch<ClassCodeResponse>(url, {
+    const { data, error } = await useFetch<ClassCodeResponse>('/api/class/code', {
       body: { code },
       method: 'POST'
     })
@@ -42,9 +41,8 @@ export const useEnrollStore = defineStore('Enroll', () => {
   }
 
   const enroll = async({ firstname, lastname, password, classID } : EnrollParams) => {
-    const url = useDjango('auth/enroll');
 
-    const { data, error } = await useFetch<EnrollResponse>(url, {
+    const { data, error } = await useFetch<EnrollResponse>('/api/enroll', {
       body: { firstname, lastname, password, classID},
       method: 'POST'
     })

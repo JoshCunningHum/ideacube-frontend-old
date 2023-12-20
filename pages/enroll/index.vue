@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { resetAllMocks } from '@storybook/test';
 import { set, get } from '@vueuse/core';
+import { ClassCodeResponseStatus } from '~/stores/Enroll';
 
 definePageMeta({
     layout: 'anonymous',
@@ -30,7 +31,7 @@ const askCode = async (str: string) => {
   // TODO: Add case for server
   if(!data) return;
 
-  if(data.type === ClassCodeResponseType.Valid){
+  if(data.status === ClassCodeResponseStatus.Valid){
     router.push(`/enroll/${get(code)}`);
   }else{
     // Set message to code is not valid
