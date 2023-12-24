@@ -69,7 +69,7 @@ const create = (e: FormSubmitEvent<Schema>) => {
         <template #footer>
           <div class="flex justify-end gap-2">
             <UButton color="white" @click="show = false">Cancel</UButton>
-            <UButton :loading="isFetching" type="submit">Create</UButton>
+            <UButton :loading="isFetching" type="submit" color="accent">Create</UButton>
           </div>
         </template>
 

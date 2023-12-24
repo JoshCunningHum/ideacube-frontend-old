@@ -11,3 +11,4 @@ export interface Allowed_File_types{
     file_extension: string | null;
     type_description: string | null;
 }
+

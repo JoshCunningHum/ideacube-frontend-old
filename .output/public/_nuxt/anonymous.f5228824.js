@@ -1,1 +1,0 @@
-import{_ as s,c as o,aS as c,o as n}from"./entry.2e60e461.js";const r={},t={class:"h-screen w-screen"};function a(e,_){return n(),o("div",t,[c(e.$slots,"default")])}const d=s(r,[["render",a]]);export{d as default};

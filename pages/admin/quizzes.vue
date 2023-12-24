@@ -11,10 +11,10 @@ const { quizzes } = storeToRefs(quizStore);
 const { sync: syncQuiz } = quizStore;
 const { sync: syncClass } = classStore;
 
-onMounted(() => {
+// onMounted(() => {
   syncClass();
   syncQuiz();
-});
+// });
 
 // Class Filter
 const { classes } = storeToRefs(classStore);

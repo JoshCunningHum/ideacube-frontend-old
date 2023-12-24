@@ -1,5 +1,4 @@
 import { useDjango } from "~/composables/Django";
-import { LoginResponse } from "~/stores/Auth";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody<{username: string, password: string}>(event);

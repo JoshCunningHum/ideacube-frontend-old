@@ -7,8 +7,8 @@ export const useAccount = () => {
   const user = useCookie<User | null>('ideacube-user');
   set(user, get(user) || <User>{
     id: -1, 
-    first_name: null, 
-    last_name: null, 
+    first_name: undefined, 
+    last_name: undefined, 
     is_approved: 0, 
     class_id: 0, 
     is_admin: false,

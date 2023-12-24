@@ -11,31 +11,32 @@ export default defineNuxtConfig({
     global: true,
     icons: ['mdi'],
   },
-  purgeCSS: {
-    whitelistPatterns: [/^ct/]
-} ,
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   app: {
     head: {
       title: 'Ideacube',
     }
   },
   modules: [
+    '@nuxt/ui',
     '@pinia/nuxt',
     '@vueuse/nuxt',
     '@nuxtjs/device',
-    '@nuxtjs/storybook',
     'nuxt-typed-router',
-    '@nuxt/ui'
   ],
-  storybook: {
-    url: 'http://localhost:6006',
-    storybookRoute: '/__storybook__',
-    port: 6006,
+  components: true,
+  typescript: {
+    typeCheck: true
   },
   devServer: {
     host: '192.168.1.104',
     port: 5173
-  },
+  }
 })
 
 /** Might be used in the future

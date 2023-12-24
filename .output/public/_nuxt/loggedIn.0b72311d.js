@@ -1,1 +1,0 @@
-import{bG as e,bH as a}from"./entry.2e60e461.js";import{u as r}from"./Account.9c8f71b4.js";import{n}from"./nameToEmail.1fd2a55b.js";import{g as s}from"./index.ccfc92be.js";const g=e((m,i)=>{const t=r();if(!t.isLoggedIn())return;const o=s(t.user);return a(`/${o.is_admin?"admin":n(o.first_name||"",o.last_name||"")}`)});export{g as default};

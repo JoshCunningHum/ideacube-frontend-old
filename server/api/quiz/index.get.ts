@@ -1,6 +1,5 @@
-import { useAccount } from "~/composables/Account";
 import { useDjango } from "~/composables/Django"
-import { Quiz } from "~/types/Quiz";
+import { type Quiz } from "~/types/Quiz";
 import serverAuth from "~/utils/serverAuth";
 
 export default defineEventHandler(async (event) => {

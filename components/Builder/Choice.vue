@@ -31,11 +31,10 @@ const pointdistribute = ref(!props.choice.point);
 const chosenType = computed(() => props.question.type);
 
 const correctChoices = useArrayFilter(choices, c => !!c.is_correct);
-const totalPointsOnCorrect = useArrayReduce(correctChoices, (total, c) => total += !!c.point ? c.point : 0, 0);
 
 
-watch([chosenType, pointdistribute, props.question, choices], () => {
-  if(!get(pointdistribute)) return;
+watch([chosenType, pointdistribute, props.question, choices, iscorrect], () => {
+  if(!get(pointdistribute) || !(get(iscorrect))) return;
 
   if(get(chosenType) === QuestionType.Identification){
       get(choices).forEach(c => c.point = props.question.points);
@@ -55,7 +54,7 @@ const remove = () => {
   <div class="mb-2 px-2 py-1 flex gap-2 items-center">
     <UIcon name="i-mdi-menu" class="text-2xl cursor-pointer dragger" />
     <div class="w-24" v-if="question.type !== QuestionType.Identification">
-      <UButton :color="choice.is_correct ? 'primary' : 'prim'" @click="choice.is_correct = !choice.is_correct" block>{{ choice.is_correct ? 'Correct' : 'Incorrect' }}</UButton>
+      <UButton :color="choice.is_correct ? 'accent' : 'prim'" @click="choice.is_correct = !choice.is_correct" block>{{ choice.is_correct ? 'Correct' : 'Incorrect' }}</UButton>
     </div>
     <div class="w-60" v-if="choice.is_correct">
       <UButtonGroup class="flex">
@@ -63,7 +62,7 @@ const remove = () => {
         <UInput type="number" class="flex-grow" :disabled="pointdistribute" placeholder="Points" v-model="choice.point" />
         
         <UButton :label="`${pointdistribute ? 'Distributed' : 'Manual'}`" @click="pointdistribute = !pointdistribute"
-                :color="`${pointdistribute ? 'primary' : 'prim'}`"
+                :color="`${pointdistribute ? 'accent' : 'prim'}`"
                 :ui="{ base: 'w-28 text-center flex justify-center items-center' }" />
 
       </UButtonGroup>

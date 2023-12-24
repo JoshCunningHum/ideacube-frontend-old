@@ -80,7 +80,7 @@ onMounted(async () => {
 
         <div class="flex gap-2">
 
-          <UButton icon="i-mdi-floppy" size="xs" v-if="hasChanges" :loading="isSaving" @click="save">Save Changes</UButton>
+          <UButton icon="i-mdi-floppy" size="xs" v-if="hasChanges" :loading="isSaving" @click="save" color="accent">Save Changes</UButton>
 
           <UButton variant="link" :square="true" icon="i-mdi-close" color="white" @click="exit" />
 

@@ -83,7 +83,7 @@ const addChoice = () => {
 </script>
 
 <template>
-  <div class=" bg-prim-900 rounded-sm mb-2 p-2 flex gap-2 items-center">
+  <div class=" bg-prim-900 rounded-sm mb-2 p-2 flex gap-2 items-center min-w-[90vw]">
 
     <UIcon name="i-mdi-menu" class="text-2xl cursor-pointer dragger" />
 
@@ -115,7 +115,7 @@ const addChoice = () => {
             <UButtonGroup class="flex">
               <UInput type="number" class="flex-grow" :disabled="autoPoints" v-model="points" />
               <UButton :label="`${autoPoints ? 'Automatic' : 'Manual'}`" @click="autoPoints = !autoPoints"
-                :color="`${autoPoints ? 'primary' : 'prim'}`"
+                :color="`${autoPoints ? 'accent' : 'prim'}`"
                 :ui="{ base: 'w-28 text-center flex justify-center items-center' }" />
             </UButtonGroup>
           </UFormGroup>
