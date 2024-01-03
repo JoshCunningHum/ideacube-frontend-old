@@ -14,9 +14,7 @@ const { sync } = classStore;
 const { classes } = storeToRefs(classStore);
 const search = ref('');
 const isCreating = ref(false);
-
-// On Mount
-onMounted(() => sync());
+sync();
 
 </script>
 

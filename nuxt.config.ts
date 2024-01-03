@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   alias: {
-    assets: "/<rootDir>/assets"
+    assets: "/<rootDir>/assets",
   },
   css : [
     "~/assets/css/main.scss",
@@ -36,7 +36,7 @@ export default defineNuxtConfig({
   devServer: {
     host: '192.168.1.104',
     port: 5173
-  }
+  },
 })
 
 /** Might be used in the future

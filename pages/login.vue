@@ -55,7 +55,7 @@ const onsubmit = async(e: FormSubmitEvent<Schema>) => {
 
   // Do things accordingly
   if(type === LoginResponseStatus.AdminAccount){
-    router.push('/admin');
+    router.push('/admin/classes');
   }else if(type === LoginResponseStatus.StudentAccount){
     router.push(`/${e.data.email}`);
   }

@@ -13,6 +13,7 @@ const { unregisteredcount } = storeToRefs(studentStore);
 // Data
 const tabs = computed(() => [{
   label: 'Registered',
+  
 }, {
   label: 'Unregistered',
   badge: get(unregisteredcount)
@@ -46,6 +47,7 @@ const isIncluded = (u: User) => {
 
     <!-- Ignore this big chunk of code -->
     <UTabs :items="tabs"
+      @change="syncStudents()"
       :ui="{ list: { background: 'bg-transparent dark:bg-transparent', width: 'w-full max-w-[405px]', marker: { rounded: 'rounded-sm', background: 'bg-prim-500 dark:bg-prim-400', }, tab: { active: 'text-prim-900 dark:text-prim-900' } } }"
       v-model="showUnregister"> <template #default="{ item, index }">
         <div class="truncate helvetica round flex items-center gap-2"> <span>{{ item.label }}</span>

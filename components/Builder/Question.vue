@@ -85,7 +85,7 @@ const addChoice = () => {
 <template>
   <div class=" bg-prim-900 rounded-sm mb-2 p-2 flex gap-2 items-center min-w-[90vw]">
 
-    <UIcon name="i-mdi-menu" class="text-2xl cursor-pointer dragger" />
+    <!-- <UIcon name="i-mdi-menu" class="text-2xl cursor-pointer dragger" /> -->
 
     <div class="flex flex-col flex-grow">
 

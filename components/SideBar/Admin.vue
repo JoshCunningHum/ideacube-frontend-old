@@ -16,8 +16,8 @@ const { unregisteredcount } = storeToRefs(studentStore);
 
 const links = computed(() => [{
   label: 'Students',
-  badge: get(unregisteredcount),
   to: '/admin/students',
+  badge: 1,
   click: () => set(mob_sidebar_open, false)
 }, {
   label: 'Classes',
@@ -26,6 +26,10 @@ const links = computed(() => [{
 }, {
   label: 'Quizzes',
   to: '/admin/quizzes',
+  click: () => set(mob_sidebar_open, false)
+}, {
+  label: 'Session',
+  to: '/admin/session',
   click: () => set(mob_sidebar_open, false)
 }]);
 
@@ -37,40 +41,42 @@ const isInRoute = (link: string) => {
 </script>
 
 <template>
-  <UVerticalNavigation
-    :links="links"
-    :ui="{
-      padding: 'px-4 py-1',
-      rounded: 'rounded-none',
-      inactive: '',
+  <UVerticalNavigation :links="links" :ui="{
+    padding: 'px-4 py-1',
+    rounded: 'rounded-none',
+    inactive: '',
+    active: '',
+    badge: {
       active: '',
-      badge: {
-        active:'',
-        inactive: ''
-      }
-    }">
+      inactive: ''
+    }
+  }">
 
     <!-- Badge (PC) | Label (Mobile) -->
     <template #default="{ link }">
-      
-      <div class="badge" v-if="!isSmall">
-        <UBadge v-if="link.badge" :label="link.badge" color="red" size="xs" />
-      </div>
-      <div v-else class="label">
-        <span :class="`${isInRoute(link.to)}`">{{ link.label }}</span>
-      </div>
+
+      <ClientOnly>
+        <div class="badge" v-if="!isSmall">
+          <UBadge v-show="link.badge" :label="unregisteredcount" color="red" size="xs" />
+        </div>
+        <div v-else class="label">
+          <span :class="`${isInRoute(link.to)}`">{{ link.label }}</span>
+        </div>
+      </ClientOnly>
 
     </template>
 
     <!-- Label (PC) | Badge (Mobile) -->
     <template #badge="{ link }">
 
-      <div class="label" v-if="!isSmall">
-        <span :class="`${isInRoute(link.to)}`">{{ link.label }}</span>
-      </div>
-      <div class="badge" v-else>
-        <UBadge v-if="link.badge" :label="link.badge" color="red" size="xs" />
-      </div>
+      <ClientOnly>
+        <div class="label" v-if="!isSmall">
+          <span :class="`${isInRoute(link.to)}`">{{ link.label }}</span>
+        </div>
+        <div class="badge" v-else>
+          <UBadge v-show="link.badge" :label="unregisteredcount" color="red" size="xs" />
+        </div>
+      </ClientOnly>
 
     </template>
 
@@ -78,17 +84,19 @@ const isInRoute = (link: string) => {
 </template>
 
 <style lang="scss" scoped>
-
 .label {
-  @apply text-lg text-prim-500 group-hover:text-prim-100 h-8 flex items-center;
+  @apply text-base text-prim-500 group-hover:text-prim-100 h-8 flex items-center;
 
-  .isInRoute{
+  .isInRoute {
     @apply text-prim-200;
   }
+}
+
+span {
+  font-family: 'Helvetica Rounded';
 }
 
 .badge {
   @apply text-right justify-self-end flex-grow;
 }
-
 </style>

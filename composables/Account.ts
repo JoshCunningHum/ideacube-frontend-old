@@ -1,5 +1,5 @@
 import type { User } from "~/types/User";
-import { useStorage, set, get } from '@vueuse/core';
+import { set, get } from '@vueuse/core';
 
 export const useAccount = () => {
   // Returns all account details in the session
@@ -14,10 +14,14 @@ export const useAccount = () => {
     is_admin: false,
   });
 
-  const isLoggedIn = () => !!user.value && (user.value.is_admin || user.value.id !== -1 && user.value.id !== null);
+  const isLoggedIn = () => {
+    const res = !!user.value && (user.value.is_admin || user.value.id !== -1 && user.value.id !== null);
+
+    return res;
+  }
 
   return {
     user,
-    isLoggedIn
+    isLoggedIn,
   }
 }

@@ -16,13 +16,13 @@ const { sync: syncClass } = classStore;
   syncQuiz();
 // });
 
-// Class Filter
+// Filters
 const { classes } = storeToRefs(classStore);
 const class_filter = ref<Class[]>([]);
+const search = ref('');
 
 // Data
 const isCreating = ref(false);
-const search = ref('');
 
 // For showing the editor
 
@@ -59,7 +59,7 @@ const search = ref('');
       <div class="flex flex-col gap-2 w-full pr-2">
         
         <template v-for="q in quizzes" :key="q.id">
-          <QuizzesItem :quiz="q" />
+          <QuizzesItem :quiz="q" :search="search" :classfilter="class_filter" />
         </template>
 
       </div>

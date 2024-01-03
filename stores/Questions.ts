@@ -27,6 +27,16 @@ export const useQuestionsStore = defineStore('Questions', () => {
     return get(data);
   }
 
+  const choices = async ( quizID: number ) => {
+    // Choices
+    const { data } = await useFetch<GetChoicesResponse>('/api/quiz/questions/choices', {
+      method: 'POST',
+      body: { quizID }
+    })
+
+    return data;
+  }
+
   const create = async (args: { text: string, quizID: number, type: number, autograded: boolean, points: number}) => {
     const { data, error } = await useFetch<CUDResponse>('/api/quiz/questions/create',
     {
@@ -66,6 +76,7 @@ export const useQuestionsStore = defineStore('Questions', () => {
 
   return {
     questions,
+    choices,
     create,
     remove,
     update

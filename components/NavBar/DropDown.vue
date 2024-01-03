@@ -23,7 +23,7 @@ const navs = [
 <template>
   <UVerticalNavigation
     :links="navs"
-    class="w-[150px] z-20">
+    class="w-[150px] z-50">
 
     <!-- TODO: Not clickable thinggy -->
     <template #icon="{ link }">

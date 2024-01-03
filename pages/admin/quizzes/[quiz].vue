@@ -89,7 +89,7 @@ onMounted(async () => {
       </div>
 
       <!-- Body -->
-      <div class="flex-grow min-h-0 overflow-y-auto pr-2">
+      <div class="flex-grow min-h-0 overflow-y-auto overflow-x-hidden pr-2">
 
         <draggable
           tag="div"

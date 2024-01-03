@@ -11,13 +11,16 @@ const props = defineProps({
 
 // Store
 const studentStore = useStudentStore();
+const scoketStore = useSocketStore();
 const classStore = useClassStore();
 const not_approved = computed(() => !props.user.is_approved);
 
 // Data
+const { peers } = storeToRefs(scoketStore);
 const { studentToRemove } = storeToRefs(studentStore);
 const { classes } = storeToRefs(classStore);
 const _class = computed(() => get(classes).find(c => c.id === props.user.class_id));
+const isconnected = computed(() => get(peers).some(p => p.id === props.user.id));
 
 // Approve
 const is_approving = ref(false);
@@ -40,6 +43,10 @@ const approve = async () => {
     </div>
 
     <div class="flex gap-2 items-center">
+      
+      <UIcon v-if="isconnected" name="i-mdi-wifi" class="connected" />
+      <UIcon v-else name="i-mdi-wifi-off" />
+
       <UButton v-if="not_approved" label="Approve" @click="approve" size="xs" color="prim" :loading="is_approving" />
       <UButton variant="link" icon="i-mdi-trash" color="red" :padded="false" @click="studentToRemove = user.id" />
     </div>
@@ -49,4 +56,7 @@ const approve = async () => {
 
 <style lang="scss" scoped>
 
+.connected {
+  @apply text-accent-500;
+}
 </style>

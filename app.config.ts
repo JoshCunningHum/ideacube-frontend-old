@@ -5,7 +5,7 @@ export default defineAppConfig({
     // NUXT UI Config
     ui: {
         primary: 'accent',
-        gray: 'prim',
+        gray: 'zinc',
         input: {
             rounded: 'rounded-sm',
         },
@@ -24,6 +24,9 @@ export default defineAppConfig({
         },
         popover: {
             rounded: 'rounded-sm'
+        },
+        selectMenu: {
+            rounded: 'rounded-none'
         }
     },
     // Nuxt Config

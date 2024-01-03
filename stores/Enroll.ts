@@ -30,12 +30,16 @@ export interface EnrollResponse{
 
 export const useEnrollStore = defineStore('Enroll', () => {
 
-  const classFromCode = async (code: string) => {
+  const classFromCode = async (code: string) => { 
+
+    await asyncSleep(100);
 
     const { data, error } = await useFetch<ClassCodeResponse>('/api/class/code', {
       body: { code },
       method: 'POST'
     })
+
+    console.log(code, get(data));
 
     return get(data);
   }

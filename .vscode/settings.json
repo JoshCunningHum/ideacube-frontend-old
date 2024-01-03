@@ -14,12 +14,9 @@
     "editor.quickSuggestions": {
         "strings": true
     },
-    "tailwindCSS.classAttributes": [
-      "class",
-      "className",
-      "ngClass",
-      "ui"
-    ],
+    "tailwindCSS.classAttributes": ["class", "className", "ngClass", "ui"],
     "dotnetAcquisitionExtension.enableTelemetry": false,
-    "typescript.tsserver.maxTsServerIdleTime": 600000
+    "typescript.tsserver.maxTsServerIdleTime": 600000,
+    "javascript.implicitProjectConfig.checkJs": true,
+    "javascript.validate.enable": true
 }

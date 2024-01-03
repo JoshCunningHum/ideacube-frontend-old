@@ -241,6 +241,32 @@ export const useQuizBuilderStore = defineStore('QuizBuilder', () => {
     }));
     //#endregion
 
+    // Get all quizzes, map those ids to our questions
+    const { data: qdata } = await useFetch<GetQuestionResponse>('/api/quiz/questions', {
+      method: 'POST',
+      body: { quizID }
+    });
+    
+    // Loop through all added questions then assign the choices assigned to them to the ID that is now updated
+    get(addedQuestions).forEach(q => {
+      if(!qdata.value) return;
+
+      const lastid = q.id;
+
+      const questionupdated = qdata.value.questions.find(qn => 
+        qn.text === q.text && 
+        qn.points === q.points && 
+        qn.type === q.type);
+
+      const newid = questionupdated ? questionupdated.id : -1;
+
+      console.log(newid, q.quiz_id, qdata.value, q);
+
+      get(copyChoiceMap).filter(c => c.quizID === lastid).forEach(c => c.quizID = newid)
+    })
+
+    console.log(get(copyChoiceMap));
+
     //#region Choices
     await Promise.all(get(changedChoiceMap).map(async (cm) => {
       await useFetch('/api/quiz/questions/choices/set', {

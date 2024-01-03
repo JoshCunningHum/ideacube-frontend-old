@@ -8,3 +8,7 @@ export interface User{
     // Not found in django but necessary in here
     is_admin: boolean;
 }
+
+export interface SocketUser extends User{
+    socketID: string;
+}

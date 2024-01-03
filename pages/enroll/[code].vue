@@ -35,7 +35,9 @@ const _class = computed(() => get(ccresponse)?.class);
 const hasMounted = ref(false);
 
 onMounted(async () => {
-  set(ccresponse, await classFromCode(get(code)));
+  const response = await classFromCode(get(code));
+
+  set(ccresponse, response);
   set(hasMounted, true);
   state.classID = `${get(_class)?.id}`;
 })

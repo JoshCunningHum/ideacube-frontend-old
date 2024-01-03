@@ -4,6 +4,8 @@ export default defineEventHandler(async (event) => {
   const body = await readBody<{code: string}>(event);
   const url = useDjango('class/code');
 
+  console.log(body);
+
   return await fetch(url, {
     method: 'POST',
     body: JSON.stringify(body),
